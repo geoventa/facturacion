@@ -1,0 +1,51 @@
+<!-- Navigation -->
+<fuse-vertical-navigation
+    #fuseVerticalNavigationComponent
+    class="dark bg-primary print:hidden"
+    [mode]="isScreenSmall ? 'over' : 'side'"
+    [name]="'mainNavigation'"
+    [navigation]="navigation.default"
+    [opened]="!isScreenSmall">
+    <!-- Navigation header hook -->
+    <ng-container fuseVerticalNavigationContentHeader>
+        <div class="flex items-center w-full p-4 pl-6">
+            <!-- Logo -->
+            <div class="flex items-center justify-center">
+                <img
+                    class="w-full"
+                    src="assets/images/logo/logo-text.svg">
+            </div>
+        </div>
+        <!-- User -->
+
+    </ng-container>
+    <!-- Navigation footer hook -->
+</fuse-vertical-navigation>
+
+<!-- Wrapper -->
+<div class="flex flex-col flex-auto w-full min-w-0">
+
+    <app-header-vertical>
+        <ng-container extras>
+            <button
+                mat-icon-button
+                (click)="toggleNavigation('mainNavigation')">
+                <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+            </button>
+        </ng-container>
+    </app-header-vertical>
+    <app-page-title></app-page-title>
+    <!-- Content -->
+    <div class="content flex-col h-full">
+        <!-- *ngIf="true" hack is required here for router-outlet to work correctly.
+             Otherwise, layout changes won't be registered and the view won't be updated! -->
+        <router-outlet *ngIf="true"></router-outlet>
+    </div>
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+
+</div>
+
+<!-- Quick chat -->
+<!--<quick-chat #quickChat="quickChat"></quick-chat>-->

@@ -1,0 +1,139 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+@import "tailwind";
+@import '~ngx-toastr/toastr';
+:root{
+    --bg-contenedor-menu: #E01F25;
+}
+
+
+
+.dark fuse-vertical-navigation-group-item > .fuse-vertical-navigation-item-wrapper .fuse-vertical-navigation-item .fuse-vertical-navigation-item-title-wrapper .fuse-vertical-navigation-item-title{
+    color: #FFF0AC!important;
+}
+
+
+.border-list{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 12px;
+    border-color: #D3D3D3;
+}
+
+.fila:nth-child(2n-1) {
+    .celda{
+        background-color: white;
+    }
+}
+
+.fila:nth-child(2n-2) {
+    .celda{
+        background: var(--tr-impar-back);
+    }
+}
+.fila:hover{
+    .celda{
+        background: var(--tr-hover);
+    }
+}
+
+.celda-header{
+    min-height: 25px;
+    height: 100%;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border-color: #D3D3D3;
+    padding: 0 5px;
+    color: white;
+    background: #2F4F72;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 14px!important;
+}
+
+.celda-header-light{
+    @extend .celda-header;
+    background: #8694b4;
+}
+
+.celda{
+    min-height: 22px;
+    height: 100%;
+    color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #D3D3D3;
+    padding: 0 5px;
+    display: flex;
+    justify-items: center;
+    font-size: 14px;
+}
+
+.form-buscar{
+    display: flex;
+    width: 100%;
+    color: #838791;
+    font-weight: bold;
+    input{
+        border-bottom-left-radius: 12px;
+        border-top-left-radius: 12px;
+        flex-grow: 1;
+        border-width: 1px;
+        padding: 0 12px;
+    }
+    .icon-buscar{
+        width: 35px;
+        height: 35px;
+        background: #CBD5E1;
+        border-bottom-right-radius: 12px;
+        border-top-right-radius: 12px;
+        border-width: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.fila:hover, body.light .mat-menu-item:hover{
+    background: var(--tr-hover)!important;
+}
+
+.mat-menu-content:not(:empty){
+    padding-top: 0!important;
+    .menu-item{
+        color: white;
+        height: 40px;
+        background: #535455;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+.pregunta{
+    @apply flex flex-col mt-4;
+    label{
+        @apply text-sm font-bold w-full;
+    }
+    .opcion-si-no {
+        mat-radio-button {
+            @apply sm:w-1/2 w-full mt-2;
+        }
+    }
+    .opcion{
+        mat-radio-button {
+            @apply w-full mt-2;
+        }
+    }
+    input{
+        @apply border-gray-400 border-2 w-full rounded-xl px-2;
+        --tw-placeholder-opacity: 1;
+        color: rgba(var(--fuse-primary-300-rgb), var(--tw-placeholder-opacity));
+    }
+}

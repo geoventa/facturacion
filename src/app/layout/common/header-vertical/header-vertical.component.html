@@ -1,0 +1,10 @@
+<div class="relative flex flex-0 items-center w-full h-8 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
+    <!-- Navigation toggle button -->
+    <ng-content select="[extras]"></ng-content>
+    <!-- Components -->
+    <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
+        <app-user-header></app-user-header>
+        <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
+        <user></user>
+    </div>
+</div>

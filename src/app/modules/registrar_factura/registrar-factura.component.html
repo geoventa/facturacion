@@ -1,0 +1,177 @@
+<div class=" flex flex-col w-full">
+    <div class="w-full border-gray-400 border rounded-xl px-8 py-2">
+        <div class="w-full md:flex">
+            <div class="md:w-1/2 w-full sm:flex sm:mr-2">
+                <div class="sm:w-30 w-full sm:mr-2">
+                    <div class="font-bold">Cliente</div>
+                    <input  matTooltip="Buscar cliente por numero de documento, primer nombre y primer apellido" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10" #buscarCliente (keyup)="filterClients(buscarCliente.value)">
+                </div>
+                <select [(ngModel)]="selectedClient" (change)="setCliente()" class="sm:w-auto w-full placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 sm:mt-auto mt-2 sm:flex-grow">
+                    <option disabled [value]="0">Selecione un cliente</option>
+                    <option  [value]="cliente.id_cliente" *ngFor="let cliente of filteredCLient">{{cliente.numero_documento_cliente + ' - ' + cliente.primer_nombre_cliente + '  ' + cliente.primer_apellido_cliente}}</option>
+                </select>
+            </div>
+            <div class="md:w-1/2 w-full sm:flex flex-row sm:mr-2">
+                <div class="sm:w-30 w-full sm:mr-2">
+                    <div class="font-bold">Vendedor</div>
+                    <input matTooltip="Buscar vendedor por numero de documento y nombre de cuenta" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10" #buscarVendedor (keyup)="filterSeller(buscarVendedor.value)">
+                </div>
+                <select [(ngModel)]="selectedSeller" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex mt-auto flex-grow">
+                    <option disabled [value]="0">Selecione un vendedor</option>
+                    <option [value]="seller.id_vendedor" *ngFor="let seller of filteredSellers">{{seller.nombre_cuenta_vendedor}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="w-full md:flex flex-row md:mr-2">
+            <div class="sm:w-50 w-full md:mr-2">
+                <div class="font-bold">Cantidad</div>
+                <input [(ngModel)]="quantityProducts" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10">
+            </div>
+            <div class="sm:flex sm:flex-grow sm:w-auto w-auto">
+                <div class="w-30 sm:mr-2">
+                    <div class="font-bold">Producto</div>
+                    <input matTooltip="Busca producto por su nombre" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10" #seacrhProduct (keyup)="filterProduct(seacrhProduct.value)">
+                </div>
+                <select [(ngModel)]="selectedProduct" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex mt-auto flex-grow md:mr-2">
+                    <option disabled [value]="0">Selecione un producto</option>
+                    <option [value]="product.id_producto" *ngFor="let product of filteredProducts">{{product.nombre_producto}}</option>
+                </select>
+            </div>
+            <div class="flex justify-end">
+                <button (click)="agregarItemFactura()" class="bg-green-500 text-white w-40 h-10 rounded-xl md:mt-auto mt-2">Agregar</button>
+            </div>
+
+        </div>
+        <div class="flex justify-end">
+            <div class="mr-2 mt-auto">
+                <div class="font-bold">
+                    Tipo de factura
+                </div>
+                <div class="flex">
+                    <mat-radio-group [(ngModel)]="invoiceType">
+                        <mat-radio-button class="mr-2" [value]="0">Contado</mat-radio-button>
+                        <mat-radio-button [value]="1">Credito</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <button (click)="agregarFechaDeCobro()" type="button" [disabled]="invoiceType === 0" [ngClass]="{'bg-gray-500 cursor-not-allowed': invoiceType === 0, 'bg-purple-600 cursor-pointer': invoiceType === 1}" class=" px-2 text-white w-auto h-10 rounded-xl mt-auto mr-2">Fechas de cobro</button>
+            <div>
+                <div class="font-bold">
+                    Valor a abonar
+                </div>
+                <input [disabled]="invoiceType === 0"  [(ngModel)]="valueToPay" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-40 h-10 mt-auto" matInput type="number">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="selectedClientModel" class="h-auto border-list mt-2 text-gray-500 text-xl ">
+        <div class="w-full">
+            <div class="font-bold">
+                Numero documento :
+            </div>
+            <div>
+                {{selectedClientModel.numero_documento_cliente}}
+            </div>
+        </div>
+        <div class="flex w-full">
+            <div class="flex w-1/2">
+                <div class="font-bold">
+                    Nombres :
+                </div>
+                <div>
+                    {{selectedClientModel.primer_nombre_cliente + ' ' + selectedClientModel.segundo_nombre_cliente}}
+                </div>
+            </div>
+            <div class="flex w-1/2">
+                <div class="font-bold">
+                    Apellidos :
+                </div>
+                <div>
+                    {{selectedClientModel.primer_apellido_cliente + ' ' + selectedClientModel.segundo_apellido_cliente}}
+                </div>
+            </div>
+        </div>
+        <div class="flex w-full">
+            <div class="flex w-1/2">
+                <div class="font-bold">
+                    Numero de telefono :
+                </div>
+                <div>
+                    {{selectedClientModel.numero_telefono_uno_cliente}}
+                </div>
+            </div>
+            <div class="flex w-1/2">
+                <div class="font-bold">
+                    Dirección :
+                </div>
+                <div>
+                    {{selectedClientModel.direccion_cliente}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-grow sm:h-0 max-h-600px overflow-hidden border-list mt-2">
+        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto overflow-x-auto h-full">
+            <ng-container>
+                <div matSort>
+                    <!-- Header -->
+                    <div
+                        class="grid-articulos sticky top-0 grid text-secondary bg-white  z-99">
+                        <div mat-sort-header="clgCode" class="celda-header">
+                            <div>Cod.</div>
+                        </div>
+                        <div mat-sort-header="team" class="flex celda-header">
+                            <div>Descripción</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Cantidad</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Valor U.</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Valor Total.</div>
+                        </div>
+                    </div>
+                    <!-- Rows -->
+                    <div *ngFor="let itemInvoice of itemInvioces; let i = index;" class="fila w-full">
+                        <div class="grid-articulos grid items-center">
+                            <div class="flex celda justify-end">
+                                <mat-icon matTooltip="Quitar articulo de la lista" class="cursor-pointer mr-2 stroke-red-600" (click)="quitarArticulo(itemInvoice)" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                                <mat-icon matTooltip="Restar una unidad al articulo" class="cursor-pointer mr-2" (click)="restarCantidad(itemInvoice)" *ngIf="itemInvoice.unidades_item_factura > 1" [svgIcon]="'heroicons_outline:minus'"></mat-icon>
+                                <mat-icon matTooltip="Agregar una unidad al articulo" class="cursor-pointer mr-2" (click)="sumarCantidad(itemInvoice)" [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                                {{getProductById(itemInvoice.producto_item_factura)?.id_producto}}
+                            </div>
+                            <div class="block break-words celda">
+                                {{itemInvoice.nombre_producto_item_factura}}
+                            </div>
+                            <div class="flex celda justify-end">
+                                {{itemInvoice.unidades_item_factura | number: '1.0-0'}}U
+                            </div>
+                            <div class="flex celda justify-end">
+                                ${{itemInvoice.precio_venta_item_factura | number: '1.0-0'}}
+                            </div>
+                            <div class="flex celda justify-end">
+                                ${{itemInvoice.precio_venta_total_item_factura | number: '1.0-0'}}
+                            </div>
+                        </div>
+                        <!--<div class="grid">
+                            <ng-container>
+                                <div>
+                                    <ng-container *ngTemplateOutlet="rowDetailsTraslado; context: {$implicit: articulo}"></ng-container>
+                                </div>
+                            </ng-container>
+                        </div>-->
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #noVendedores>
+                <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">
+                    <div>No hay encuestadores</div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="flex justify-end pt-2">
+        <button (click)="registrarFactura()" class="bg-blue-600 text-white w-40 h-10 rounded-xl mt-auto">Registrar factura</button>
+    </div>
+</div>

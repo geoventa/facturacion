@@ -1,0 +1,51 @@
+layout {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    /* Base styles for individual layouts */
+    > * {
+        position: relative;
+        display: flex;
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    /* Base styles for components that load as a route */
+    router-outlet {
+        + * {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            width: 100%;
+        }
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 0;
+        overflow-x: hidden;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        @media (min-width: 600px) {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            overflow-y: hidden;
+        }
+
+        .main {
+            flex: 1 1 auto;
+            padding: 0.5rem;
+            @media (min-width: 600px) {
+                height: 1px;
+                flex-grow: 1;
+            }
+        }
+    }
+}
