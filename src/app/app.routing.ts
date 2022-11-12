@@ -10,7 +10,7 @@ import {NavigationService} from './core/navigation/navigation.service';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/example'
-    {path: '', pathMatch : 'full', redirectTo: 'autenticacion-por-token'},
+    {path: '', pathMatch : 'full', redirectTo: 'sign-in'},
 
     // Redirect signed in user to the '/example'
     //

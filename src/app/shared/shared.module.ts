@@ -4,6 +4,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {NgxMultipleDatesModule} from "ngx-multiple-dates";
 
 @NgModule({
     imports: [
@@ -11,7 +14,10 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         FormsModule,
         ReactiveFormsModule,
         MatIconModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        NgxMultipleDatesModule
     ],
     exports: [
         CommonModule,
@@ -19,7 +25,10 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         ReactiveFormsModule,
         MatSelectModule,
         MatIconModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        NgxMultipleDatesModule
     ],
     declarations: [
   ]
