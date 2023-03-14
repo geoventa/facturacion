@@ -1,71 +1,99 @@
-<div class=" flex flex-col w-full">
+<div class=" w-full">
     <div class="w-full border-gray-400 border rounded-xl px-8 py-2">
         <div class="w-full md:flex">
-            <div class="md:w-1/2 w-full sm:flex sm:mr-2">
+            <div class="md:w-3/5 w-full sm:flex flex-row sm:mr-2">
                 <div class="sm:w-30 w-full sm:mr-2">
                     <div class="font-bold">Cliente</div>
                     <input  matTooltip="Buscar cliente por numero de documento, primer nombre y primer apellido" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10" #buscarCliente (keyup)="filterClients(buscarCliente.value)">
                 </div>
-                <select [(ngModel)]="selectedClient" (change)="setCliente()" class="sm:w-auto w-full placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 sm:mt-auto mt-2 sm:flex-grow">
+                <select [(ngModel)]="selectedClient" (change)="setCliente()" class="sm:w-0 flex-grow w-full placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 sm:mt-auto mt-2 sm:flex-grow">
                     <option disabled [value]="0">Selecione un cliente</option>
                     <option  [value]="cliente.id_cliente" *ngFor="let cliente of filteredCLient">{{cliente.numero_documento_cliente + ' - ' + cliente.primer_nombre_cliente + '  ' + cliente.primer_apellido_cliente}}</option>
                 </select>
             </div>
-            <div class="md:w-1/2 w-full sm:flex flex-row sm:mr-2">
-                <div class="sm:w-30 w-full sm:mr-2">
-                    <div class="font-bold">Vendedor</div>
-                    <input matTooltip="Buscar vendedor por numero de documento y nombre de cuenta" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10" #buscarVendedor (keyup)="filterSeller(buscarVendedor.value)">
-                </div>
-                <select [(ngModel)]="selectedSeller" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex mt-auto flex-grow">
+            <div class="md:w-1/5 md:mt-0 mt-2 w-full sm:flex flex-row sm:mr-2">
+                <select (change)="sellerChangue()" [(ngModel)]="selectedSeller" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex mt-auto w-full flex-grow">
                     <option disabled [value]="0">Selecione un vendedor</option>
-                    <option [value]="seller.id_vendedor" *ngFor="let seller of filteredSellers">{{seller.nombre_cuenta_vendedor}}</option>
+                    <option [value]="seller.id_vendedor" *ngFor="let seller of sellers">{{seller.nombre_cuenta_vendedor}}</option>
+                </select>
+            </div>
+            <div class="md:w-1/5 w-full flex-row sm:mr-2 md:mt-0 mt-2">
+                <mat-label><div class="font-bold">Ruta</div></mat-label>
+                <select [(ngModel)]="selectedRoute" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex flex-grow w-full">
+                    <option disabled [value]="0">Selecione una ruta</option>
+                    <option [value]="seller.id_ruta" *ngFor="let seller of routBySeller">{{seller.nombre_ruta}}</option>
                 </select>
             </div>
         </div>
         <div class="w-full md:flex flex-row md:mr-2">
-            <div class="sm:w-50 w-full md:mr-2">
+            <div class="sm:w-50 w-full md:mr-2 md:mt-0 mt-2">
                 <div class="font-bold">Cantidad</div>
                 <input [(ngModel)]="quantityProducts" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10">
             </div>
-            <div class="sm:flex sm:flex-grow sm:w-auto w-auto">
-                <div class="w-30 sm:mr-2">
+            <div class="sm:flex sm:flex-grow sm:w-auto w-full">
+                <div class="w-30 sm:mr-2 w-full md:mt-0 mt-2">
                     <div class="font-bold">Producto</div>
                     <input matTooltip="Busca producto por su nombre" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10" #seacrhProduct (keyup)="filterProduct(seacrhProduct.value)">
                 </div>
-                <select [(ngModel)]="selectedProduct" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex mt-auto flex-grow md:mr-2">
+                <select [(ngModel)]="selectedProduct" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex sm:mt-auto flex-grow md:mr-2 mt-2">
                     <option disabled [value]="0">Selecione un producto</option>
                     <option [value]="product.id_producto" *ngFor="let product of filteredProducts">{{product.nombre_producto}}</option>
                 </select>
             </div>
-            <div class="flex justify-end">
+            <div class="flex justify-end md:mt-0 mt-2">
                 <button (click)="agregarItemFactura()" class="bg-green-500 text-white w-40 h-10 rounded-xl md:mt-auto mt-2">Agregar</button>
             </div>
-
         </div>
         <div class="flex justify-end">
-            <div class="mr-2 mt-auto">
+            <!--<div class="mr-2 mt-auto">
                 <div class="font-bold">
                     Tipo de factura
                 </div>
                 <div class="flex">
                     <mat-radio-group [(ngModel)]="invoiceType">
-                        <mat-radio-button class="mr-2" [value]="0">Contado</mat-radio-button>
+                        <mat-radio-button class="mr-2" [value]="2">Contado</mat-radio-button>
                         <mat-radio-button [value]="1">Credito</mat-radio-button>
                     </mat-radio-group>
                 </div>
-            </div>
-            <button (click)="agregarFechaDeCobro()" type="button" [disabled]="invoiceType === 0" [ngClass]="{'bg-gray-500 cursor-not-allowed': invoiceType === 0, 'bg-purple-600 cursor-pointer': invoiceType === 1}" class=" px-2 text-white w-auto h-10 rounded-xl mt-auto mr-2">Fechas de cobro</button>
+            </div>-->
             <div>
                 <div class="font-bold">
                     Valor a abonar
                 </div>
-                <input [disabled]="invoiceType === 0"  [(ngModel)]="valueToPay" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-40 h-10 mt-auto" matInput type="number">
+                <input (keyup)="calcularCupoDisponible()" [disabled]="invoiceType === 2"  [(ngModel)]="valueToPay" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 w-full h-10" matInput type="number">
             </div>
         </div>
+        <mat-form-field class="w-full mt-2">
+            <mat-label><label class="font-bold">Fechas de cobro</label></mat-label>
+            <ngx-multiple-dates [disabled]="invoiceType === 2" [min]="min" [(ngModel)]="billingDate" [matDatepicker]="picker" placeholder="Excluded Dates" name="excludedDates">
+            </ngx-multiple-dates>
+            <mat-datepicker-toggle  matPrefix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="text-xl text-red-500 font-bold">
+            Valor Factura = $ {{ valorTotal | number: '1.0-0'}}
+        </div>
+        <div class="text-xl text-red-300">
+            Valor abono = $ {{ (billingDate.length > 0) ? (valorTotal/billingDate.length | number: '1.0-0') : valorTotal}}
+        </div>
     </div>
-    <div *ngIf="selectedClientModel" class="h-auto border-list mt-2 text-gray-500 text-xl ">
-        <div class="w-full">
-            <div class="font-bold">
+    <div *ngIf="selectedClientModel" class="h-auto border-list mt-2 text-gray-500 text-xl p-4">
+        <div class="sm:flex justify-end w-full">
+            <div class="flex flex-col justify-center sm:w-40 w-full text-xl">
+                <div class="font-bold w-full text-center">Cupo disponible</div>
+                <div class="w-full text-center">
+                    {{availableCredit | number: '1.0-0'}}
+                </div>
+            </div>
+            <div class="flex flex-col sm:w-40 w-full text-xl">
+                <div class="w-full text-center font-bold">Cupo original</div>
+                <div class="w-full text-center">
+                    {{selectedClientModel.cupo_credito_disponible_cliente | number: '1.0-0'}}
+                </div>
+            </div>
+        </div>
+        <div class="flex w-full">
+            <div class="font-bold mr-2">
                 Numero documento :
             </div>
             <div>
@@ -74,7 +102,7 @@
         </div>
         <div class="flex w-full">
             <div class="flex w-1/2">
-                <div class="font-bold">
+                <div class="font-bold mr-2">
                     Nombres :
                 </div>
                 <div>
@@ -82,7 +110,7 @@
                 </div>
             </div>
             <div class="flex w-1/2">
-                <div class="font-bold">
+                <div class="font-bold mr-2">
                     Apellidos :
                 </div>
                 <div>
@@ -92,7 +120,7 @@
         </div>
         <div class="flex w-full">
             <div class="flex w-1/2">
-                <div class="font-bold">
+                <div class="font-bold mr-2">
                     Numero de telefono :
                 </div>
                 <div>
@@ -100,7 +128,7 @@
                 </div>
             </div>
             <div class="flex w-1/2">
-                <div class="font-bold">
+                <div class="font-bold mr-2">
                     Dirección :
                 </div>
                 <div>
@@ -108,8 +136,15 @@
                 </div>
             </div>
         </div>
+        <div class="flex justify-end w-full">
+            <div class="sm:w-40 w-full mr-2">
+                <div class="w-full">Nuevo cupo</div>
+                <input #nuevoCupo type="number" class="w-full placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 mt-auto">
+            </div>
+            <button (click)="cambiarCupoCLiente(nuevoCupo.value)" type="button" class="bg-orange-500 text-white w-40 h-10 rounded-xl mt-auto">Cambiar cupo</button>
+        </div>
     </div>
-    <div class="flex flex-grow sm:h-0 max-h-600px overflow-hidden border-list mt-2">
+    <div class="flex h-auto overflow-hidden border-list mt-2">
         <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto overflow-x-auto h-full">
             <ng-container>
                 <div matSort>

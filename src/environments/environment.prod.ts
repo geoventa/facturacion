@@ -1,4 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://186.64.120.93:91/semilla_backend/api/',
+    apiUrl: 'http://45.236.129.84:91/',
+    apiNodejs: 'http://45.236.129.84:3200/',
 };

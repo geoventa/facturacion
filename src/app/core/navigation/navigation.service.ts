@@ -10,8 +10,8 @@ import { Navigation } from 'app/core/navigation/navigation.types';
 export class NavigationService
 {
     static ROUT_LISTA_ENCUESTADORES = 'lista-encuestadores';
-    static ROUT_FACTURA = 'facturas';
-    static ROUT_REGISTRAR_FACTURA = 'registrar_factrua';
+    static ROUT_MIS_FACTURA = 'mis_facturas';
+    static ROUT_REGISTRAR_FACTURA = 'registrar_factura';
     static ROUT_CONSULTAR_ENCUESTAS = 'consultar-encuestas';
     static ROUT_REGISTRAR_ENCUESTAS = 'registrar-encuestas';
     static ROUT_MODIFICAR_ENCUESTAS = 'modificar-encuestas';
@@ -47,7 +47,7 @@ export class NavigationService
                         title: 'Lista de facturas',
                         type: 'basic',
                         icon: 'feather:search',
-                        link:  `/${NavigationService.ROUT_LISTA_ENCUESTADORES}`
+                        link:  `/${NavigationService.ROUT_MIS_FACTURA}`
                     },
                     {
                         id: 'facturas.registrar_factura',

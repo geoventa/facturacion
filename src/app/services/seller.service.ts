@@ -3,11 +3,8 @@ import {Services} from '../models/services';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {GetService} from '../models/get-service';
 import {environment} from '../../environments/environment';
-import {Encuestador} from '../models/encuestador';
-import { Usuario } from 'app/models/usuario';
-import {Seller} from "../models/seller";
+import {Seller} from '../models/seller';
 
 const api = `${environment.apiNodejs}seller`;
 
@@ -23,5 +20,9 @@ export class SellerService extends Services<any> {
 
     getSellerByEnterprice(empresa: number): Observable<Seller[]> {
         return this.get(`${api}/enterprice/${empresa}`);
+    }
+
+    getSellerByMunicipality(municipality: number): Observable<Seller[]> {
+        return this.get(`${api}/municipality/${municipality}`);
     }
 }

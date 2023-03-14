@@ -17,13 +17,11 @@ export const appRoutes: Route[] = [
     // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
-    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo:  NavigationService.ROUT_FACTURA},
+    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo:  NavigationService.ROUT_REGISTRAR_FACTURA},
 
     // Auth routes for guests
     {
         path: '',
-        canActivate: [NoAuthGuard],
-        canActivateChild: [NoAuthGuard],
         component: LayoutComponent,
         data: {
             layout: 'empty'
@@ -94,8 +92,8 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children   : [
-            {path:  NavigationService.ROUT_FACTURA, loadChildren: (): any =>
-                    import('app/modules/registrar_factura/registrar_factura.module').then(m => m.Registrar_facturaModule)},
+            {path:  NavigationService.ROUT_MIS_FACTURA, loadChildren: (): any =>
+                    import('app/modules/mis-facturas/mis-facturas.module').then(m => m.MisFacturasModule)},
             {path:  NavigationService.ROUT_REGISTRAR_FACTURA, loadChildren: (): any =>
                     import('app/modules/registrar_factura/registrar_factura.module').then(m => m.Registrar_facturaModule)},
         ]

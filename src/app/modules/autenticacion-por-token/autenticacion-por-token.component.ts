@@ -23,7 +23,7 @@ export class AutenticacionPorTokenComponent implements OnInit {
   autenticar(token: string): void {
       this.autchService.signInUsingToken(token).subscribe(async (item) => {
           console.log(item);
-          await this.router.navigate([NavigationService.ROUT_FACTURA]);
+          await this.router.navigate([NavigationService.ROUT_MIS_FACTURA]);
       });
   }
 

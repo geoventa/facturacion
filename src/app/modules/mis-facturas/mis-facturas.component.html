@@ -1,0 +1,120 @@
+<div class=" w-full">
+    <div class="w-full border-gray-400 border rounded-xl px-8 py-2">
+        <div>
+            <div>Vendedor</div>
+            <select (change)="sellerChangue()" [(ngModel)]="selectedSeller" class="placeholder-gray-500 border-gray-600 border-2 rounded-xl px-4 h-10 flex mt-auto w-full flex-grow">
+                <option disabled [value]="0">Selecione un vendedor</option>
+                <option [value]="seller.id_vendedor" *ngFor="let seller of sellers">{{seller.nombre_cuenta_vendedor}}</option>
+            </select>
+        </div>
+        <div>Rango de fecha</div>
+        <div class="flex w-full max-w-xl">
+            <div class="mr-2 w-1/2">
+                <div>Fecha de inicio</div>
+                <input class="border-gray-400 border rounded-xl px-2" [(ngModel)]="dateStart" type="date">
+            </div>
+            <div class=" w-1/2">
+                <div>Fecha de corte</div>
+                <input class="border-gray-400 border rounded-xl px-2" [(ngModel)]="dateEnd" type="date">
+            </div>
+        </div>
+    </div>
+    <div class="flex h-auto overflow-hidden border-list mt-2">
+        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto overflow-x-auto h-full">
+            <ng-container>
+                <div matSort>
+                    <!-- Header -->
+                    <div
+                        class="grid-articulos sticky top-0 grid text-secondary bg-white  z-99">
+                        <div mat-sort-header="clgCode" class="celda-header">
+                            <div>Cliente</div>
+                        </div>
+                        <div mat-sort-header="team" class="flex celda-header">
+                            <div>Negocio</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Direcció</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Telefono</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Vendedor</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Fecha</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Factura</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Valor factura</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 1</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 2</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 3</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 4</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 5</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 6</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 7</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 8</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 9</div>
+                        </div>
+                        <div mat-sort-header="articulo" class="celda-header">
+                            <div>Abono 10</div>
+                        </div>
+                    </div>
+                    <!-- Rows -->
+                    <div *ngFor="let itemInvoice of invoices; let i = index;" class="fila w-full">
+                        <div class="grid-articulos grid items-center">
+                            <div class="flex celda justify-end">
+                                {{getProductById(itemInvoice.producto_item_factura)?.id_producto}}
+                            </div>
+                            <div class="block break-words celda">
+                                {{itemInvoice.nombre_producto_item_factura}}
+                            </div>
+                            <div class="flex celda justify-end">
+                                {{itemInvoice.unidades_item_factura | number: '1.0-0'}}U
+                            </div>
+                            <div class="flex celda justify-end">
+                                ${{itemInvoice.precio_venta_item_factura | number: '1.0-0'}}
+                            </div>
+                            <div class="flex celda justify-end">
+                                ${{itemInvoice.precio_venta_total_item_factura | number: '1.0-0'}}
+                            </div>
+                        </div>
+                        <!--<div class="grid">
+                            <ng-container>
+                                <div>
+                                    <ng-container *ngTemplateOutlet="rowDetailsTraslado; context: {$implicit: articulo}"></ng-container>
+                                </div>
+                            </ng-container>
+                        </div>-->
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #noVendedores>
+                <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">
+                    <div>No hay encuestadores</div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
