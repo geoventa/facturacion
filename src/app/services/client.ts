@@ -20,7 +20,7 @@ export class ClientService extends Services<any> {
 
     getClients(empresa: number): Observable<Client[]> {
         console.log(`${api}/${empresa}`);
-        return this.get(`${api}${empresa}`);
+        return this.get(`${api}/enterprice/${empresa}`);
     }
 
     updateAvailableCredit(cliente: number, cupo: number): Observable<{cod: number; message: string; data: Client}> {

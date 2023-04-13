@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Route} from '../models/route';
+import {Municipality} from "../models/municipality";
 
 const api = `${environment.apiNodejs}municipality`;
 
@@ -20,5 +21,9 @@ export class MunicipioService extends Services<any> {
 
     getRouteBySeller(seller: number): Observable<Route[]> {
         return this.get(`${api}/seller/${seller}`);
+    }
+
+    public municipioConsultaConCoordenada(): Observable<Municipality[]> {
+        return this.http.get<Municipality[]>(`${api}witch_coordinate`);
     }
 }

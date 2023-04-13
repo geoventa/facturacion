@@ -42,13 +42,13 @@ export class NavigationService
                 type: 'group',
                 icon: 'mat_outline:person_outline',
                 children: [
-                    {
+                    /*{
                         id: 'facturas.lista_factura',
                         title: 'Lista de facturas',
                         type: 'basic',
                         icon: 'feather:search',
                         link:  `/${NavigationService.ROUT_MIS_FACTURA}`
-                    },
+                    },*/
                     {
                         id: 'facturas.registrar_factura',
                         title: 'Registrar factura',
